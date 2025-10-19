@@ -149,6 +149,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MultiplayerManager
   _colyseusSettings: {fileID: 11400000, guid: 4147ccd014c574b57875d6a25887e4ff, type: 2}
+  _player: {fileID: 3295133682229618247, guid: 111882e19d8d04a3db6d5edd4baed8db, type: 3}
+  _enemy: {fileID: -8543248124813139567, guid: 2e750c2483a304a77a68183ac6758ad4, type: 3}
 --- !u!4 &4436527
 Transform:
   m_ObjectHideFlags: 0
@@ -251,7 +253,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 10, z: 0}
+  m_LocalPosition: {x: 0, y: 50.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

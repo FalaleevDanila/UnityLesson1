@@ -50,11 +50,12 @@
   <ItemGroup>
     <Compile Include="Assets/Scripts/Multiplayer/generated/State.cs" />
     <Compile Include="Assets/Scripts/PlayerCharacter.cs" />
+    <Compile Include="Assets/Scripts/EnemyController.cs" />
     <Compile Include="Assets/TutorialInfo/Scripts/Readme.cs" />
     <Compile Include="Assets/Scripts/Multiplayer/generated/Player.cs" />
+    <Compile Include="Assets/Scripts/EnemyCharacter.cs" />
     <Compile Include="Assets/Scripts/Multiplayer/MultiplayerManager.cs" />
     <Compile Include="Assets/Scripts/Controller.cs" />
-    <Compile Include="Assets/Scripts/NewMonoBehaviourScript.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

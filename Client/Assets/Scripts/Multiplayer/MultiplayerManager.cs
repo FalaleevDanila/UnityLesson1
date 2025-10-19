@@ -1,11 +1,13 @@
+using System.Collections.Generic;
 using Colyseus;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class MultiplayerManager : ColyseusManager<MultiplayerManager> {
+public class MultiplayerManager : ColyseusManager<MultiplayerManager>
+{
     private ColyseusRoom<State> _room;
     [SerializeField] private GameObject _player;
-    [SerializeField] private GameObject _enemy;
+    [SerializeField] private EnemyController _enemy;
     protected override void Awake()
     {
         base.Awake();
@@ -22,26 +24,41 @@ public class MultiplayerManager : ColyseusManager<MultiplayerManager> {
     {
         if (!isFirstState)
             return;
-        var player = state.players[_room.SessionId];
-        var position = new Vector3(player.x - 200, 0, player.y - 200) / 8;
 
-        Instantiate(_player, position, Quaternion.identity);
-
-        state.players.ForEach(ForEachEnemy);
+        state.players.ForEach((key, player) =>
+        {
+            if (key == _room.SessionId) CreatePlayer(player);
+            else CreateEnemy(key, player);
+        });
+        _room.State.players.OnAdd += CreateEnemy;
+        _room.State.players.OnRemove += RemoveEnemy;
     }
 
-    private void ForEachEnemy(string key, Player player)
+    private void CreatePlayer(Player player)
     {
-        if (key == _room.SessionId)
-            return;
-        var position = new Vector3(player.x - 200, 0, player.y - 200) / 8;
-
-        Instantiate(_enemy, position, Quaternion.identity);
+        var position = new Vector3(player.x, 0, player.y);
+        Instantiate(_player, position, Quaternion.identity);
+    }
+    private void CreateEnemy(string key, Player player)
+    {
+        var position = new Vector3(player.x, 0, player.y);
+        var enemy = Instantiate(_enemy, position, Quaternion.identity);
+        player.OnChange += enemy.OnChange;
     }
     protected override void OnDestroy()
     {
         base.OnDestroy();
         _room.Leave();
+    }
+
+    private void RemoveEnemy(string key, Player player)
+    {
+
+    }
+
+    public void SendMessage(string key, Dictionary<string, object> data)
+    {
+        _room.Send(key, data);
     }
 
 }

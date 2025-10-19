@@ -13,7 +13,7 @@ public class PlayerCharacter : MonoBehaviour
         _inputV = v;
     }
 
-    
+
 
 
     // Update is called once per frame
@@ -21,10 +21,14 @@ public class PlayerCharacter : MonoBehaviour
     {
         Move();
     }
-    
+
     void Move()
     {
         Vector3 direction = new Vector3(_inputH, 0, _inputV).normalized;
         transform.position += direction * Time.deltaTime * _speed;
+    }
+
+    public void GetMoveInfo(out Vector3 position) {
+        position = transform.position;
     }
 }
