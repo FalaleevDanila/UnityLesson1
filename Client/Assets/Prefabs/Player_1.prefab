@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8307007582192571012}
   - component: {fileID: 5442549489042771013}
   - component: {fileID: 1640348753664709742}
+  - component: {fileID: 5086926692491796827}
   m_Layer: 0
   m_Name: Player_1
   m_TagString: Untagged
@@ -46,6 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94b1d57eec3f14291a0d79684282e327, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
+  _rightbody: {fileID: 5086926692491796827}
   _speed: 2
 --- !u!114 &1640348753664709742
 MonoBehaviour:
@@ -60,6 +62,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Controller
   _player: {fileID: 5442549489042771013}
+--- !u!54 &5086926692491796827
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3295133682229618247}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 80
+  m_CollisionDetection: 0
 --- !u!1 &6092571010818590013
 GameObject:
   m_ObjectHideFlags: 0
