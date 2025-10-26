@@ -6,7 +6,7 @@ using UnityEngine;
 public class MultiplayerManager : ColyseusManager<MultiplayerManager>
 {
     private ColyseusRoom<State> _room;
-    [SerializeField] private GameObject _player;
+    [SerializeField] private PlayerCharacter _player;
     [SerializeField] private EnemyController _enemy;
     protected override void Awake()
     {
@@ -14,9 +14,20 @@ public class MultiplayerManager : ColyseusManager<MultiplayerManager>
         Instance.InitializeClient();
         Connect();
     }
+
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
+        _room.Leave();
+    }
+
     private async void Connect()
     {
-        _room = await Instance.client.JoinOrCreate<State>("state_handler");
+        Dictionary<string, object> data = new Dictionary<string, object>()
+        {
+            { "speed", _player.speed }
+        };
+        _room = await Instance.client.JoinOrCreate<State>("state_handler", data);
         _room.OnStateChange += OnChange;
     }
 
@@ -36,6 +47,7 @@ public class MultiplayerManager : ColyseusManager<MultiplayerManager>
 
     private void CreatePlayer(Player player)
     {
+
         var position = new Vector3(player.pX, player.pY, player.pZ);
         Instantiate(_player, position, Quaternion.identity);
     }
@@ -43,14 +55,10 @@ public class MultiplayerManager : ColyseusManager<MultiplayerManager>
     {
         var position = new Vector3(player.pX, player.pY, player.pZ);
         var enemy = Instantiate(_enemy, position, Quaternion.identity);
+        enemy.Init(player);
         player.OnChange += enemy.OnChange;
     }
-    protected override void OnDestroy()
-    {
-        base.OnDestroy();
-        _room.Leave();
-    }
-
+    
     private void RemoveEnemy(string key, Player player)
     {
 

@@ -61,17 +61,20 @@ public class PlayerCharacter : Character
         _rigidbody.linearVelocity = base.velocity;
     }
 
-    public void GetMoveInfo(out Vector3 position, out Vector3 velocity)
+    public void GetMoveInfo(out Vector3 position, out Vector3 velocity, out float rotateX, out float rotateY)
     {
         position = transform.position;
         velocity = _rigidbody.linearVelocity;
+
+        rotateX = _head.localEulerAngles.x;
+        rotateY = transform.eulerAngles.y;
+
     }
 
     public void Jump()
     {
         if (_checkFly.IsFly) return;
         if (Time.time - _jumpTime < _jumpDelay) return;
-        //Debug.Log("Jump\n");
         _jumpTime = Time.time;
         _rigidbody.AddForce(0, _jumpForce, 0, ForceMode.VelocityChange);
         
