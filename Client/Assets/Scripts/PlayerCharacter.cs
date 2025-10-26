@@ -10,8 +10,7 @@ public class PlayerCharacter : MonoBehaviour
     [SerializeField] private Transform _cameraPoint;
     [SerializeField] private float _maxHeadAngle = 90;
     [SerializeField] private float _minHeadAngle = -90;
-
-    [SerializeField] private float _jumpForce = 5;
+    [SerializeField] private float _jumpForce = 5F;
 
     private float _inputH;
     private float _inputV;
@@ -89,5 +88,6 @@ public class PlayerCharacter : MonoBehaviour
     {
         if (_isFly) return;
         _rigidbody.AddForce(0, _jumpForce, 0, ForceMode.VelocityChange);
+        
     }
 }
