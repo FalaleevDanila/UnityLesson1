@@ -5,6 +5,7 @@ public class Controller : MonoBehaviour
 {
     [SerializeField] private PlayerCharacter _player;
     [SerializeField] private float _mouseSensetivity = 2f;
+    [SerializeField] private PlayerGun _gun;
 
     // Update is called once per frame
     private void Update()
@@ -15,12 +16,19 @@ public class Controller : MonoBehaviour
         float mouseX = Input.GetAxis("Mouse X");
         float mouseY = Input.GetAxis("Mouse Y");
 
+        bool isShoot = Input.GetMouseButton(0);
+
         bool space = Input.GetKeyDown(KeyCode.Space);
 
         _player.SetInput(h, v, mouseX * _mouseSensetivity);
         _player.RotateX(-mouseY * _mouseSensetivity);
 
         if (space) _player.Jump();
+
+        if (isShoot)
+        {
+            _gun.Shoot();
+        }
         SendMove();
     }
 
@@ -30,7 +38,8 @@ public class Controller : MonoBehaviour
         Dictionary<string, object> data = new Dictionary<string, object>()
         {
             {"pX", position.x},
-            {"pY", position.z},
+            {"pY", position.y},
+            {"pZ", position.z},
             {"vX", velocity.x},
             {"vY", velocity.y},
             {"vZ", velocity.z},
