@@ -58,7 +58,7 @@ public class MultiplayerManager : ColyseusManager<MultiplayerManager>
         enemy.Init(player);
         player.OnChange += enemy.OnChange;
     }
-    
+
     private void RemoveEnemy(string key, Player player)
     {
 
@@ -69,4 +69,15 @@ public class MultiplayerManager : ColyseusManager<MultiplayerManager>
         _room.Send(key, data);
     }
 
+
+
+    public void SendMessage(string key, string data)
+    {
+        _room.Send(key, data);
+    }
+
+    public string GetSessionID()
+    {
+        return _room.SessionId;
+    }
 }

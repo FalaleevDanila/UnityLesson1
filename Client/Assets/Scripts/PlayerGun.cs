@@ -10,16 +10,26 @@ public class PlayerGun : MonoBehaviour
     private float _lastShootTime;
 
     public Action shoot;
-    public void Shoot()
+    public bool TryShoot(out ShootInfo info)
     {
+        info = new ShootInfo();
         if (Time.time - _lastShootTime < _shootDelay)
         {
-            return;
+            return false;
         }
-        _lastShootTime = Time.time;
-        Instantiate(_bulletPrefab, _bulletPoint.position, _bulletPoint.rotation).Init(_bulletPoint.forward, _bulletSpeed);
 
+        Vector3 position = _bulletPoint.position;
+        Vector3 direction = _bulletPoint.forward;
+
+        _lastShootTime = Time.time;
+        Instantiate(_bulletPrefab, _bulletPoint.position, _bulletPoint.rotation).Init(direction, _bulletSpeed);
         shoot?.Invoke();
+
+        direction *= _bulletSpeed;
+        info.pX = position.x;
+        info.pY = position.y;
+        info.pZ = position.z;
+        return true;
 
     } 
     
