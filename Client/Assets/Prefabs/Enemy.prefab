@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 5200204961829807725}
   - component: {fileID: 1200553888599412597}
   - component: {fileID: 1199144631736219884}
+  - component: {fileID: 535149296009132580}
+  - component: {fileID: 2854578204588046973}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -65,6 +67,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
   _character: {fileID: 1470377119699930724}
+  _enemyGun: {fileID: 535149296009132580}
 --- !u!136 &5068870088811951783
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -134,6 +137,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyCharacter
   <speed>k__BackingField: 2
   _head: {fileID: 3613993380463504955}
+--- !u!114 &535149296009132580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3295133682229618247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c615cb2fa62ec4d2bb4e0f77476b513a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyGun
+  _bulletPrefab: {fileID: 9207243776506684541, guid: 491cc7ea58e8b47998eac2c9613582ce, type: 3}
+--- !u!114 &2854578204588046973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3295133682229618247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 310e3371c164744f8a26f9a313ade4ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GunAnimation
+  _gun: {fileID: 535149296009132580}
+  _animator: {fileID: 8871199463713762597}
 --- !u!1001 &7434158426392433798
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -229,5 +259,10 @@ Animator:
 --- !u!4 &6404263147239451832 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4597028247493687358, guid: 5b9e5150db7b2204d98b5f69a683d1e6, type: 3}
+  m_PrefabInstance: {fileID: 7434158426392433798}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &8871199463713762597 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2033299753870195107, guid: 5b9e5150db7b2204d98b5f69a683d1e6, type: 3}
   m_PrefabInstance: {fileID: 7434158426392433798}
   m_PrefabAsset: {fileID: 0}
