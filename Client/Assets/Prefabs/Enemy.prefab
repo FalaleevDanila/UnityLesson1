@@ -55,7 +55,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyCharacter
   <maxHealth>k__BackingField: 10
-  <speed>k__BackingField: 2
+  <speed>k__BackingField: 4
   _health: {fileID: 4089014865134611436}
   _head: {fileID: 3613993380463504955}
 --- !u!114 &-8543248124813139567
@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyCharacter
   <maxHealth>k__BackingField: 10
-  <speed>k__BackingField: 2
+  <speed>k__BackingField: 4
   _health: {fileID: 0}
   _head: {fileID: 3613993380463504955}
 --- !u!114 &535149296009132580

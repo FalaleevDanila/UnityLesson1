@@ -1,8 +1,11 @@
 using System;
 using UnityEngine;
+using System.Collections.Generic;
+using Colyseus.Schema;
 
 public class PlayerCharacter : Character
 {
+    [SerializeField] private Health _health;
     [SerializeField] private Rigidbody _rigidbody;
     [SerializeField] private Transform _head;
     [SerializeField] private Transform _cameraPoint;
@@ -11,7 +14,7 @@ public class PlayerCharacter : Character
     [SerializeField] private float _jumpForce = 5F;
     [SerializeField] private CheckFly _checkFly;
     [SerializeField] private float _jumpDelay = 0.2F;
-    
+
     private float _inputH;
     private float _inputV;
     private float _rotateY;
@@ -24,6 +27,8 @@ public class PlayerCharacter : Character
         camera.parent = _cameraPoint;
         camera.localPosition = Vector3.zero;
         camera.localRotation = Quaternion.identity;
+        _health.SetMax(maxHealth);
+        _health.SetCurrent(maxHealth);
     }
 
     public void SetInput(float h, float v, float rotateY)
@@ -38,7 +43,7 @@ public class PlayerCharacter : Character
         _rigidbody.angularVelocity = new Vector3(0, _rotateY, 0);
         _rotateY = 0;
     }
-    
+
 
 
     public void RotateX(float value)
@@ -77,6 +82,23 @@ public class PlayerCharacter : Character
         if (Time.time - _jumpTime < _jumpDelay) return;
         _jumpTime = Time.time;
         _rigidbody.AddForce(0, _jumpForce, 0, ForceMode.VelocityChange);
-        
+
+    }
+
+    internal void OnChange(List<DataChange> changes)
+    {
+        foreach (var dataChange in changes)
+        {
+            switch (dataChange.Field)
+            {
+                case "currentHP":
+                    _health.SetCurrent((sbyte)dataChange.Value);
+                    break;
+                
+                default:
+                    //Debug.LogWarning("Dont know this field: " + dataChange.Field);
+                    break;
+            }
+        } 
     }
 }
