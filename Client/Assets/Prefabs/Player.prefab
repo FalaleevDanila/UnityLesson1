@@ -387,7 +387,7 @@ MonoBehaviour:
   _bulletPrefab: {fileID: 9207243776506684541, guid: 491cc7ea58e8b47998eac2c9613582ce, type: 3}
   _damage: 1
   _bulletPoint: {fileID: 4970007243177506474}
-  _bulletSpeed: 23
+  _bulletSpeed: 50
   _shootDelay: 0.3
 --- !u!95 &649930182033923261
 Animator:
