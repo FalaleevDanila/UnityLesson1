@@ -12,10 +12,7 @@ public class PlayerGun : Gun
     public bool TryShoot(out ShootInfo info)
     {
         info = new ShootInfo();
-        if (Time.time - _lastShootTime < _shootDelay)
-        {
-            return false;
-        }
+        if (Time.time - _lastShootTime < _shootDelay)return false;
 
         Vector3 position = _bulletPoint.position;
         Vector3 velocity = _bulletPoint.forward * _bulletSpeed;;

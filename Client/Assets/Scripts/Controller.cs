@@ -1,22 +1,27 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Controller : MonoBehaviour
 {
+    [SerializeField] private float _restartDelay = 3f;
     [SerializeField] private PlayerCharacter _player;
     [SerializeField] private float _mouseSensetivity = 2f;
     [SerializeField] private PlayerGun _gun;
 
     private MultiplayerManager _multiplayerManager;
+    private bool _hold = false;
 
     private void Start()
     {
         _multiplayerManager = MultiplayerManager.Instance;
     }
 
-    // Update is called once per frame
+    
     private void Update()
     {
+        if (_hold) return;
+        
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
 
@@ -32,10 +37,8 @@ public class Controller : MonoBehaviour
 
         if (space) _player.Jump();
 
-        if (isShoot && _gun.TryShoot(out ShootInfo shootInfo))
-        {
-            SendShoot(ref shootInfo);
-        }
+        if (isShoot && _gun.TryShoot(out ShootInfo shootInfo)) SendShoot(ref shootInfo);
+
         SendMove();
     }
 
@@ -64,6 +67,36 @@ public class Controller : MonoBehaviour
         };
         _multiplayerManager.SendMessage("move", data);
     }
+
+    public void Restart(string jsonRestartInfo)
+    {
+        RestartInfo info = JsonUtility.FromJson<RestartInfo>(jsonRestartInfo);
+        StartCoroutine(Hold());
+        
+        _player.transform.position = new Vector3(info.x, 0, info.z);
+        _player.SetInput(0,0,0);
+        
+        Dictionary<string, object> data = new Dictionary<string, object>()
+        {
+            { "pX", info.x },
+            { "pY", 0 },
+            { "pZ", info.z },
+            { "vX", 0 },
+            { "vY", 0 },
+            { "vZ", 0 },
+            { "rX", 0 },
+            { "rY", 0 }
+        };
+        
+        _multiplayerManager.SendMessage("move", data);
+    }
+
+    private IEnumerator Hold()
+    {
+        _hold = true;
+        yield return new WaitForSecondsRealtime(_restartDelay);
+        _hold = false;
+    }
 }
 
 
@@ -77,4 +110,11 @@ public struct ShootInfo
     public float pX;
     public float pY;
     public float pZ;
+}
+
+[System.Serializable]
+public struct RestartInfo
+{
+    public float x;
+    public float z;
 }

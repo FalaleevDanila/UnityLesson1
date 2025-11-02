@@ -94,9 +94,10 @@ public class PlayerCharacter : Character
                 case "currentHP":
                     _health.SetCurrent((sbyte)dataChange.Value);
                     break;
-                
+                case "loss":
+                    MultiplayerManager.Instance.lossCounter.SetPlayerLoss((byte)dataChange.Value);
+                    break;
                 default:
-                    //Debug.LogWarning("Dont know this field: " + dataChange.Field);
                     break;
             }
         } 

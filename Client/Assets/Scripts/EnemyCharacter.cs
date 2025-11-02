@@ -19,7 +19,7 @@ public class EnemyCharacter : Character
 
     private void Update()
     {
-        if (_velocityMagnitude > 0.1f)
+        if (_velocityMagnitude >= .1f)
         {
             float maxDistance = _velocityMagnitude * Time.deltaTime;
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, maxDistance);
@@ -41,6 +41,11 @@ public class EnemyCharacter : Character
         _velocityMagnitude = velocity.magnitude;
 
         this.velocity = velocity;
+    }
+
+    public void RestoreHP(int newValue)
+    {
+        _health.SetCurrent(newValue);
     }
 
     public void SetMaxHP(int value)

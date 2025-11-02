@@ -6,7 +6,7 @@ public class EnemyController : MonoBehaviour
 {
     [SerializeField] private EnemyCharacter _character;
     [SerializeField] private EnemyGun _enemyGun;
-    private List<float> _recievTimeInterval = new List<float> { 0, 0, 0, 0, 0 };
+    private List<float> _recievTimeInterval = new List<float> { 0f, 0f, 0f, 0f, 0f };
     private float _lastRecieveTime = 0f;
     private Player _player;
     private float AverageInterval
@@ -32,6 +32,7 @@ public class EnemyController : MonoBehaviour
     }
     internal void OnChange(List<DataChange> changes)
     {
+        SaveRecieveTime();
         Vector3 position = _character.targetPosition;
         Vector3 velocity = _character.velocity;
 
@@ -39,6 +40,16 @@ public class EnemyController : MonoBehaviour
         {
             switch (dataChange.Field)
             {
+                case "loss":
+                    MultiplayerManager.Instance.lossCounter.SetEnemyLoss((byte)dataChange.Value);
+                    break;
+                case "currentHP":
+                    if ((sbyte)dataChange.Value > (sbyte)dataChange.PreviousValue)
+                    {
+                        _character.RestoreHP((sbyte)dataChange.Value);
+                    }
+
+                    break;
                 case "pX":
                     position.x = (float)dataChange.Value;
                     break;
@@ -69,7 +80,7 @@ public class EnemyController : MonoBehaviour
             }
         }
         _character.SetMovement(position, velocity, AverageInterval);
-        transform.position = position;
+        
     }
 
     public void Init(string key, Player player)

@@ -4,9 +4,11 @@ public class CharacterAnimation : MonoBehaviour
 {
     private const string Grounded = "Grounded";
     private const string Speed = "Speed";
+
     [SerializeField] private Animator _animator;
     [SerializeField] private CheckFly _checkFly;
     [SerializeField] private Character _character;
+
     void Update()
     {
         Vector3 localVelocity = _character.transform.InverseTransformVector(_character.velocity);
