@@ -40,6 +40,7 @@ public class EnemyController : MonoBehaviour
         {
             switch (dataChange.Field)
             {
+
                 case "loss":
                     MultiplayerManager.Instance.lossCounter.SetEnemyLoss((byte)dataChange.Value);
                     break;
@@ -51,6 +52,7 @@ public class EnemyController : MonoBehaviour
 
                     break;
                 case "pX":
+                    //Debug.Log("SetMovement\n");
                     position.x = (float)dataChange.Value;
                     break;
                 case "pY":

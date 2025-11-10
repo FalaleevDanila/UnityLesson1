@@ -11,24 +11,39 @@ public class Controller : MonoBehaviour
 
     private MultiplayerManager _multiplayerManager;
     private bool _hold = false;
+    private bool _hideCursor;
 
     private void Start()
     {
+        _hideCursor = true;
         _multiplayerManager = MultiplayerManager.Instance;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            _hideCursor = !_hideCursor;
+        }
         if (_hold) return;
         
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
 
-        float mouseX = Input.GetAxis("Mouse X");
-        float mouseY = Input.GetAxis("Mouse Y");
+        float mouseX = 0;
+        float mouseY = 0;
 
-        bool isShoot = Input.GetMouseButton(0);
+        bool isShoot = false;
+        if (_hideCursor)
+        {
+            mouseX = Input.GetAxis("Mouse X");
+            mouseY = Input.GetAxis("Mouse Y");
+
+            isShoot = Input.GetMouseButton(0);
+        }
+        
 
         bool space = Input.GetKeyDown(KeyCode.Space);
 
@@ -47,7 +62,7 @@ public class Controller : MonoBehaviour
         shootInfo.key = _multiplayerManager.GetSessionID();
         string data = JsonUtility.ToJson(shootInfo);
 
-        _multiplayerManager.SendMessage("shoot", data);
+        _multiplayerManager.Send("shoot", data);
     }
 
     private void SendMove()
@@ -68,24 +83,27 @@ public class Controller : MonoBehaviour
         _multiplayerManager.SendMessage("move", data);
     }
 
-    public void Restart(string jsonRestartInfo)
+    public void Restart(int spawnIndex)
     {
-        RestartInfo info = JsonUtility.FromJson<RestartInfo>(jsonRestartInfo);
+        _multiplayerManager._spawnPoints.GetPoint(spawnIndex, out Vector3 position, out Vector3 rotation);
         StartCoroutine(Hold());
         
-        _player.transform.position = new Vector3(info.x, 0, info.z);
+        _player.transform.position = position;
+        rotation.x = 0f;
+        rotation.z = 0f;
+        _player.transform.eulerAngles = rotation;
         _player.SetInput(0,0,0);
         
         Dictionary<string, object> data = new Dictionary<string, object>()
         {
-            { "pX", info.x },
-            { "pY", 0 },
-            { "pZ", info.z },
-            { "vX", 0 },
-            { "vY", 0 },
-            { "vZ", 0 },
-            { "rX", 0 },
-            { "rY", 0 }
+            { "pX", position.x },
+            { "pY", position.y },
+            { "pZ", position.z },
+            { "vX", 0f },
+            { "vY", 0f },
+            { "vZ", 0f },
+            { "rX", 0f },
+            { "rY", rotation.y }
         };
         
         _multiplayerManager.SendMessage("move", data);
@@ -112,9 +130,3 @@ public struct ShootInfo
     public float pZ;
 }
 
-[System.Serializable]
-public struct RestartInfo
-{
-    public float x;
-    public float z;
-}

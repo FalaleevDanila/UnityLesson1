@@ -37,6 +37,7 @@ public class EnemyCharacter : Character
     }
     public void SetMovement(in Vector3 position, in Vector3 velocity, in float averageInterval)
     {
+        
         targetPosition = position + (velocity * averageInterval);
         _velocityMagnitude = velocity.magnitude;
 
