@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 535149296009132580}
   - component: {fileID: 2854578204588046973}
   - component: {fileID: 4089014865134611436}
-  - component: {fileID: 2014998309398808315}
+  - component: {fileID: 5780110279580134072}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
   _ui: {fileID: 7922527582365069325}
---- !u!114 &2014998309398808315
+--- !u!114 &5780110279580134072
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -228,7 +228,7 @@ GameObject:
   - component: {fileID: 649930182033923261}
   - component: {fileID: 8162777622772949888}
   - component: {fileID: 8340214038131119485}
-  - component: {fileID: 7743514700806766480}
+  - component: {fileID: 2457144776566045318}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -440,7 +440,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
   _ui: {fileID: 9191760185905095324}
---- !u!114 &7743514700806766480
+--- !u!114 &2457144776566045318
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

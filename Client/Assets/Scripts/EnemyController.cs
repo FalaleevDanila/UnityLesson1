@@ -33,8 +33,8 @@ public class EnemyController : MonoBehaviour
     internal void OnChange(List<DataChange> changes)
     {
         SaveRecieveTime();
-        Vector3 position = _character.targetPosition;
-        Vector3 velocity = _character.velocity;
+        Vector3 position = new Vector3(_player.pX, _player.pY, _player.pZ);
+        Vector3 velocity =  new Vector3(_player.vX, _player.vY, _player.vZ);
 
         foreach (var dataChange in changes)
         {
@@ -45,27 +45,8 @@ public class EnemyController : MonoBehaviour
                     MultiplayerManager.Instance.lossCounter.SetEnemyLoss((byte)dataChange.Value);
                     break;
                 case "currentHP":
-                    if ((sbyte)dataChange.Value > (sbyte)dataChange.PreviousValue) _character.RestoreHP((sbyte)dataChange.Value);
-                    break;
-                case "pX":
-                    Debug.Log("OnChange enemy: ");
-                    Debug.Log(dataChange.Value);
-                    position.x = (float)dataChange.Value;
-                    break;
-                case "pY":
-                    position.y = (float)dataChange.Value;
-                    break;
-                case "pZ":
-                    position.z = (float)dataChange.Value;
-                    break;
-                case "vX":
-                    velocity.x = (float)dataChange.Value;
-                    break;
-                case "vY":
-                    velocity.y = (float)dataChange.Value;
-                    break;
-                case "vZ":
-                    velocity.z = (float)dataChange.Value;
+                    if ((sbyte)dataChange.Value > (sbyte)dataChange.PreviousValue)
+                        _character.RestoreHP((sbyte)dataChange.Value);
                     break;
                 case "rX":
                     _character.SetRotateX((float)dataChange.Value);
