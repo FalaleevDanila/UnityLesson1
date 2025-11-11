@@ -45,14 +45,11 @@ public class EnemyController : MonoBehaviour
                     MultiplayerManager.Instance.lossCounter.SetEnemyLoss((byte)dataChange.Value);
                     break;
                 case "currentHP":
-                    if ((sbyte)dataChange.Value > (sbyte)dataChange.PreviousValue)
-                    {
-                        _character.RestoreHP((sbyte)dataChange.Value);
-                    }
-
+                    if ((sbyte)dataChange.Value > (sbyte)dataChange.PreviousValue) _character.RestoreHP((sbyte)dataChange.Value);
                     break;
                 case "pX":
-                    //Debug.Log("SetMovement\n");
+                    Debug.Log("OnChange enemy: ");
+                    Debug.Log(dataChange.Value);
                     position.x = (float)dataChange.Value;
                     break;
                 case "pY":
@@ -81,6 +78,8 @@ public class EnemyController : MonoBehaviour
                     break;
             }
         }
+                
+
         _character.SetMovement(position, velocity, AverageInterval);
         
     }

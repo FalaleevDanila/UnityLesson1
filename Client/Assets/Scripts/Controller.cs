@@ -80,6 +80,7 @@ public class Controller : MonoBehaviour
             {"rY", rotateY }
 
         };
+        Debug.Log("Sendmove player");
         _multiplayerManager.SendMessage("move", data);
     }
 
@@ -105,7 +106,8 @@ public class Controller : MonoBehaviour
             { "rX", 0f },
             { "rY", rotation.y }
         };
-        
+        Debug.Log("Restart  player");
+
         _multiplayerManager.SendMessage("move", data);
     }
 

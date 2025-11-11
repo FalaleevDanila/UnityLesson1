@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 5068870088811951783}
   - component: {fileID: 5200204961829807725}
   - component: {fileID: 1200553888599412597}
-  - component: {fileID: 1199144631736219884}
   - component: {fileID: 535149296009132580}
   - component: {fileID: 2854578204588046973}
   - component: {fileID: 4089014865134611436}
@@ -128,22 +127,6 @@ MonoBehaviour:
     m_Bits: 64
   _radius: 0.2
   _coyoteTime: 0
---- !u!114 &1199144631736219884
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3295133682229618247}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5eb9dd7c076f741359dd6d7e7a091033, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyCharacter
-  <maxHealth>k__BackingField: 10
-  <speed>k__BackingField: 4
-  _health: {fileID: 4089014865134611436}
-  _head: {fileID: 3613993380463504955}
 --- !u!114 &535149296009132580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -498,6 +481,18 @@ PrefabInstance:
     - target: {fileID: 3783090178872861316, guid: 5b9e5150db7b2204d98b5f69a683d1e6, type: 3}
       propertyPath: m_Name
       value: NewCharacter
+      objectReference: {fileID: 0}
+    - target: {fileID: 4597028247493687358, guid: 5b9e5150db7b2204d98b5f69a683d1e6, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4597028247493687358, guid: 5b9e5150db7b2204d98b5f69a683d1e6, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4597028247493687358, guid: 5b9e5150db7b2204d98b5f69a683d1e6, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4597028247493687358, guid: 5b9e5150db7b2204d98b5f69a683d1e6, type: 3}
       propertyPath: m_LocalPosition.x
