@@ -30,7 +30,16 @@ public class Bullet : MonoBehaviour
     {
         if (collision.collider.TryGetComponent(out EnemyCharacter enemy))
         {
-            enemy.ApplyDamage(_damage);
+            int bostDamage = _damage;
+
+            if (collision.collider.CompareTag("Head"))
+            {
+                bostDamage = _damage * 3;
+            }
+            Debug.Log(bostDamage);
+            enemy.ApplyDamage(bostDamage);
+            
+                
         }
         Destroy();
     }

@@ -55,7 +55,7 @@ public class EnemyController : MonoBehaviour
                     _character.SetRotateY((float)dataChange.Value);
                     break;
                 default:
-                    Debug.LogWarning("Dont know this field: " + dataChange.Field);
+                    //Debug.LogWarning("Dont know this field: " + dataChange.Field);
                     break;
             }
         }
